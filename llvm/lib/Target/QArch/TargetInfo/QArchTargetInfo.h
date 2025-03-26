@@ -1,0 +1,13 @@
+#ifndef LLVM_LIB_TARGET_QARCH_TARGETINFO_QARCHTARGETINFO_H
+#define LLVM_LIB_TARGET_QARCH_TARGETINFO_QARCHTARGETINFO_H
+
+namespace llvm {
+
+class Target;
+
+Target &getTheQArchTarget();
+
+} // end namespace llvm
+
+#endif // LLVM_LIB_TARGET_QARCH_TARGETINFO_QARCHTARGETINFO_H
+
