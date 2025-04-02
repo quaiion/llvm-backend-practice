@@ -1,5 +1,6 @@
 #include "MCTargetDesc/QArchInfo.h"
 #include "QArch.h"
+#include "QArchInstPrinter.h"
 #include "QArchMCAsmInfo.h"
 #include "TargetInfo/QArchTargetInfo.h"
 #include "llvm/MC/MCDwarf.h"
@@ -51,6 +52,15 @@ MAI->addInitialFrameState(Inst);
 return MAI;
 }
 
+static MCInstPrinter *createQArchMCInstPrinter(const Triple &T,
+                                             unsigned SyntaxVariant,
+                                             const MCAsmInfo &MAI,
+                                             const MCInstrInfo &MII,
+                                             const MCRegisterInfo &MRI) {
+  QARCH_DUMP_MAGENTA
+  return new QArchInstPrinter(MAI, MII, MRI);
+}
+
 // We need to define this function for linking succeed
 extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeQArchTargetMC() {
   QARCH_DUMP_MAGENTA
@@ -63,4 +73,7 @@ extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeQArchTargetMC() {
   // Register the MC subtarget info.
   TargetRegistry::RegisterMCSubtargetInfo(TheQArchTarget,
                                           createQArchMCSubtargetInfo);
+
+  // Register the MCInstPrinter
+  TargetRegistry::RegisterMCInstPrinter(TheQArchTarget, createQArchMCInstPrinter);
 }
