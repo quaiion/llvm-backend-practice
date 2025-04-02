@@ -1,7 +1,14 @@
 add_llvm_component_group(QArch)
 
+set(LLVM_TARGET_DEFINITIONS QArch.td)
+
+tablegen(LLVM QArchGenRegisterInfo.inc -gen-register-info)
+
+add_public_tablegen_target(QArchCommonTableGen)
+
 add_llvm_target(QArchCodeGen
   QArchTargetMachine.cpp
+  QArchRegisterInfo.cpp
 
   LINK_COMPONENTS
   CodeGen

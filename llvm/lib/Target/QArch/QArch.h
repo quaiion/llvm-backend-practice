@@ -1,6 +1,7 @@
-#ifndef LLVM_LIB_TARGET_QArch_QArch_H
-#define LLVM_LIB_TARGET_QArch_QArch_H
+#ifndef LLVM_LIB_TARGET_QARCH_QARCH_H
+#define LLVM_LIB_TARGET_QARCH_QARCH_H
 
+#include "MCTargetDesc/QArchMCTargetDesc.h"
 #include "llvm/Support/raw_ostream.h"
 
 #define QARCH_DUMP(Color)                                                      \
@@ -16,6 +17,6 @@
 #define QARCH_DUMP_YELLOW QARCH_DUMP(llvm::raw_ostream::YELLOW)
 #define QARCH_DUMP_CYAN QARCH_DUMP(llvm::raw_ostream::CYAN)
 #define QARCH_DUMP_MAGENTA QARCH_DUMP(llvm::raw_ostream::MAGENTA)
+#define QARCH_DUMP_WHITE QARCH_DUMP(llvm::raw_ostream::WHITE)
 
-#endif // LLVM_LIB_TARGET_QArch_QArch_H
-
+#endif // LLVM_LIB_TARGET_QARCH_QARCH_H
