@@ -22,6 +22,19 @@ enum NodeType : unsigned {
 
 } // namespace QArchISD
 
+class QArchTargetLowering : public TargetLowering {
+public:
+  explicit QArchTargetLowering(const TargetMachine &TM, const QArchSubtarget &STI);
+
+  /// This method returns the name of a target specific DAG node.
+  const char *getTargetNodeName(unsigned Opcode) const override;
+
+  QArchSubtarget const &getSubtarget() const { return STI; }
+
+private:
+  const QArchSubtarget &STI;
+};
+
 } // end namespace llvm
 
 #endif // LLVM_LIB_TARGET_QARCH_QARCHISELLOWERING_H
