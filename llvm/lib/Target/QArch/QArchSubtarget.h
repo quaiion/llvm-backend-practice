@@ -2,6 +2,7 @@
 #define LLVM_LIB_TARGET_QARCH_QARCHSUBTARGET_H
 
 #include "QArch.h"
+#include "QArchFrameLowering.h"
 #include "QArchISelLowering.h"
 #include "llvm/CodeGen/TargetSubtargetInfo.h"
 
@@ -12,6 +13,7 @@ namespace llvm {
 
 class QArchSubtarget : public QArchGenSubtargetInfo {
   QArchTargetLowering TLInfo;
+  QArchFrameLowering FrameLowering;
 
 public:
   QArchSubtarget(const Triple &TT, const std::string &CPU, const std::string &FS,
@@ -24,6 +26,10 @@ public:
   const QArchTargetLowering *getTargetLowering() const override {
     QARCH_DUMP_CYAN
     return &TLInfo;
+  }
+  const QArchFrameLowering *getFrameLowering() const override {
+    QARCH_DUMP_CYAN
+    return &FrameLowering;
   }
 };
 
