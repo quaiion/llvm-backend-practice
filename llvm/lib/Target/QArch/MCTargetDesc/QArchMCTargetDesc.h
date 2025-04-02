@@ -7,4 +7,8 @@
 #define GET_REGINFO_ENUM
 #include "QArchGenRegisterInfo.inc"
 
+// Defines symbolic names for the QArch instructions.
+#define GET_INSTRINFO_ENUM
+#include "QArchGenInstrInfo.inc"
+
 #endif // LLVM_LIB_TARGET_QARCH_MCTARGETDESC_QARCHMCTARGETDESC_H

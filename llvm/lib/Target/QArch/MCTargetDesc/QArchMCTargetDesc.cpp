@@ -1,5 +1,7 @@
+#include "MCTargetDesc/QArchInfo.h"
 #include "QArch.h"
 #include "TargetInfo/QArchTargetInfo.h"
+#include "llvm/MC/MCInstrInfo.h"
 #include "llvm/MC/MCRegisterInfo.h"
 #include "llvm/MC/TargetRegistry.h"
 
@@ -8,10 +10,20 @@ using namespace llvm;
 #define GET_REGINFO_MC_DESC
 #include "QArchGenRegisterInfo.inc"
 
+#define GET_INSTRINFO_MC_DESC
+#include "QArchGenInstrInfo.inc"
+
 static MCRegisterInfo *createQArchMCRegisterInfo(const Triple &TT) {
   QARCH_DUMP_MAGENTA
   MCRegisterInfo *X = new MCRegisterInfo();
   InitQArchMCRegisterInfo(X, QArch::R0);
+  return X;
+}
+
+static MCInstrInfo *createQArchMCInstrInfo() {
+  QARCH_DUMP_MAGENTA
+  MCInstrInfo *X = new MCInstrInfo();
+  InitQArchMCInstrInfo(X);
   return X;
 }
 
@@ -21,4 +33,6 @@ extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeQArchTargetMC() {
   Target &TheQArchTarget = getTheQArchTarget();
   // Register the MC register info.
   TargetRegistry::RegisterMCRegInfo(TheQArchTarget, createQArchMCRegisterInfo);
+  // Register the MC instruction info.
+  TargetRegistry::RegisterMCInstrInfo(TheQArchTarget, createQArchMCInstrInfo);
 }
