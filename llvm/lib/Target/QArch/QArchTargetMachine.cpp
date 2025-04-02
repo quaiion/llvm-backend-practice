@@ -1,6 +1,7 @@
 #include "QArchTargetMachine.h"
 #include "QArch.h"
 #include "TargetInfo/QArchTargetInfo.h"
+#include "llvm/CodeGen/TargetPassConfig.h"
 #include "llvm/MC/TargetRegistry.h"
 #include <optional>
 
@@ -25,3 +26,23 @@ QArchTargetMachine::QArchTargetMachine(const Target &T, const Triple &TT,
   initAsmInfo();
 }
 
+namespace {
+
+/// QArch Code Generator Pass Configuration Options.
+class QArchPassConfig : public TargetPassConfig {
+public:
+  QArchPassConfig(QArchTargetMachine &TM, PassManagerBase &PM)
+      : TargetPassConfig(TM, PM) {}
+
+  bool addInstSelector() override {
+    QARCH_DUMP_CYAN
+    return false;
+  }
+};
+
+} // end anonymous namespace
+
+TargetPassConfig *QArchTargetMachine::createPassConfig(PassManagerBase &PM) {
+  QARCH_DUMP_CYAN
+  return new QArchPassConfig(*this, PM);
+}
