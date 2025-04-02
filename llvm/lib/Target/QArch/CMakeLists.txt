@@ -5,6 +5,7 @@ set(LLVM_TARGET_DEFINITIONS QArch.td)
 tablegen(LLVM QArchGenRegisterInfo.inc -gen-register-info)
 tablegen(LLVM QArchGenInstrInfo.inc -gen-instr-info)
 tablegen(LLVM QArchGenSubtargetInfo.inc -gen-subtarget)
+tablegen(LLVM QArchGenMCPseudoLowering.inc -gen-pseudo-lowering)
 
 add_public_tablegen_target(QArchCommonTableGen)
 
@@ -13,6 +14,7 @@ add_llvm_target(QArchCodeGen
   QArchRegisterInfo.cpp
   QArchInstrInfo.cpp
   QArchSubtarget.cpp
+  QArchAsmPrinter.cpp
 
   LINK_COMPONENTS
   CodeGen
@@ -20,6 +22,7 @@ add_llvm_target(QArchCodeGen
   Support
   Target
   QArchInfo
+  AsmPrinter
 
   ADD_TO_COMPONENT
   QArch
