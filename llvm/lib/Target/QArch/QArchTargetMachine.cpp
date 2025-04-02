@@ -34,8 +34,13 @@ public:
   QArchPassConfig(QArchTargetMachine &TM, PassManagerBase &PM)
       : TargetPassConfig(TM, PM) {}
 
+  QArchTargetMachine &getQArchTargetMachine() const {
+    return getTM<QArchTargetMachine>();
+  }
+
   bool addInstSelector() override {
     QARCH_DUMP_CYAN
+    addPass(createQArchISelDag(getQArchTargetMachine(), getOptLevel()));
     return false;
   }
 };

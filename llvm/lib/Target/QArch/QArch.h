@@ -1,8 +1,9 @@
-#ifndef LLVM_LIB_TARGET_QARCH_QARCH_H
-#define LLVM_LIB_TARGET_QARCH_QARCH_H
+#ifndef LLVM_LIB_TARGET_QArch_QArch_H
+#define LLVM_LIB_TARGET_QArch_QArch_H
 
 #include "MCTargetDesc/QArchMCTargetDesc.h"
 #include "llvm/Support/raw_ostream.h"
+#include "llvm/Target/TargetMachine.h"
 
 #define QARCH_DUMP(Color)                                                      \
   {                                                                            \
@@ -18,5 +19,12 @@
 #define QARCH_DUMP_CYAN QARCH_DUMP(llvm::raw_ostream::CYAN)
 #define QARCH_DUMP_MAGENTA QARCH_DUMP(llvm::raw_ostream::MAGENTA)
 #define QARCH_DUMP_WHITE QARCH_DUMP(llvm::raw_ostream::WHITE)
+namespace llvm {
+class QArchTargetMachine;
+class FunctionPass;
 
-#endif // LLVM_LIB_TARGET_QARCH_QARCH_H
+FunctionPass *createQArchISelDag(QArchTargetMachine &TM, CodeGenOptLevel OptLevel);
+
+} // namespace llvm
+
+#endif // LLVM_LIB_TARGET_QArch_QArch_H

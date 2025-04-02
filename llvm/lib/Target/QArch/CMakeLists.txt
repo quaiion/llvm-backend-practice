@@ -6,6 +6,7 @@ tablegen(LLVM QArchGenRegisterInfo.inc -gen-register-info)
 tablegen(LLVM QArchGenInstrInfo.inc -gen-instr-info)
 tablegen(LLVM QArchGenSubtargetInfo.inc -gen-subtarget)
 tablegen(LLVM QArchGenMCPseudoLowering.inc -gen-pseudo-lowering)
+tablegen(LLVM QArchGenDAGISel.inc -gen-dag-isel)
 
 add_public_tablegen_target(QArchCommonTableGen)
 
@@ -15,6 +16,7 @@ add_llvm_target(QArchCodeGen
   QArchInstrInfo.cpp
   QArchSubtarget.cpp
   QArchAsmPrinter.cpp
+  QArchISelDagToDag.cpp
 
   LINK_COMPONENTS
   CodeGen
@@ -23,6 +25,7 @@ add_llvm_target(QArchCodeGen
   Target
   QArchInfo
   AsmPrinter
+  SelectionDAG
 
   ADD_TO_COMPONENT
   QArch
@@ -30,4 +33,3 @@ add_llvm_target(QArchCodeGen
 
 add_subdirectory(MCTargetDesc)
 add_subdirectory(TargetInfo)
-
