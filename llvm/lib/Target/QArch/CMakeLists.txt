@@ -4,6 +4,7 @@ set(LLVM_TARGET_DEFINITIONS QArch.td)
 
 tablegen(LLVM QArchGenRegisterInfo.inc -gen-register-info)
 tablegen(LLVM QArchGenInstrInfo.inc -gen-instr-info)
+tablegen(LLVM QArchGenSubtargetInfo.inc -gen-subtarget)
 
 add_public_tablegen_target(QArchCommonTableGen)
 
@@ -11,6 +12,7 @@ add_llvm_target(QArchCodeGen
   QArchTargetMachine.cpp
   QArchRegisterInfo.cpp
   QArchInstrInfo.cpp
+  QArchSubtarget.cpp
 
   LINK_COMPONENTS
   CodeGen
