@@ -7,6 +7,7 @@ tablegen(LLVM QArchGenInstrInfo.inc -gen-instr-info)
 tablegen(LLVM QArchGenSubtargetInfo.inc -gen-subtarget)
 tablegen(LLVM QArchGenMCPseudoLowering.inc -gen-pseudo-lowering)
 tablegen(LLVM QArchGenDAGISel.inc -gen-dag-isel)
+tablegen(LLVM QArchGenCallingConv.inc -gen-callingconv)
 
 add_public_tablegen_target(QArchCommonTableGen)
 
