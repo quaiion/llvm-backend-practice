@@ -1,6 +1,7 @@
 #include "QArchTargetMachine.h"
 #include "QArch.h"
 #include "TargetInfo/QArchTargetInfo.h"
+#include "llvm/CodeGen/TargetLoweringObjectFileImpl.h"
 #include "llvm/CodeGen/TargetPassConfig.h"
 #include "llvm/MC/TargetRegistry.h"
 #include <optional>
@@ -19,9 +20,10 @@ QArchTargetMachine::QArchTargetMachine(const Target &T, const Triple &TT,
                                    std::optional<Reloc::Model> RM,
                                    std::optional<CodeModel::Model> CM,
                                    CodeGenOptLevel OL, bool JIT)
-    : CodeGenTargetMachineImpl(
-          T, "e-m:e-p:32:32-i8:8:32-i16:16:32-i64:64-n32", TT, CPU, FS, Options,
-          Reloc::Static, getEffectiveCodeModel(CM, CodeModel::Small), OL) {
+    : CodeGenTargetMachineImpl(T, "e-m:e-p:32:32-i8:8:32-i16:16:32-i64:64-n32",
+                               TT, CPU, FS, Options, Reloc::Static,
+                               getEffectiveCodeModel(CM, CodeModel::Small), OL),
+      TLOF(std::make_unique<TargetLoweringObjectFileELF>()) {
   QARCH_DUMP_CYAN
   initAsmInfo();
 }
@@ -50,4 +52,9 @@ public:
 TargetPassConfig *QArchTargetMachine::createPassConfig(PassManagerBase &PM) {
   QARCH_DUMP_CYAN
   return new QArchPassConfig(*this, PM);
+}
+
+TargetLoweringObjectFile *QArchTargetMachine::getObjFileLowering() const {
+  QARCH_DUMP_CYAN
+  return TLOF.get();
 }

@@ -8,6 +8,8 @@ namespace llvm {
 extern Target TheQArchTarget;
 
 class QArchTargetMachine : public CodeGenTargetMachineImpl {
+  std::unique_ptr<TargetLoweringObjectFile> TLOF;
+
 public:
   QArchTargetMachine(const Target &T, const Triple &TT, StringRef CPU,
                      StringRef FS, const TargetOptions &Options,
@@ -17,8 +19,8 @@ public:
 
   // Pass Pipeline Configuration
   TargetPassConfig *createPassConfig(PassManagerBase &PM) override;
+  TargetLoweringObjectFile *getObjFileLowering() const override;
 };
 } // end namespace llvm
 
 #endif // LLVM_LIB_TARGET_QARCH_QARCHTARGETMACHINE_H
-
