@@ -1,6 +1,7 @@
 #ifndef LLVM_LIB_TARGET_QARCH_MCTARGETDESC_QARCHMCTARGETDESC_H
 #define LLVM_LIB_TARGET_QARCH_MCTARGETDESC_QARCHMCTARGETDESC_H
 
+#include <memory>
 namespace llvm {
 class MCCodeEmitter;
 class MCContext;
@@ -16,6 +17,8 @@ MCCodeEmitter *createQArchMCCodeEmitter(const MCInstrInfo &MCII, MCContext &Ctx)
 MCAsmBackend *createQArchAsmBackend(const Target &T, const MCSubtargetInfo &STI,
                                     const MCRegisterInfo &MRI,
                                     const MCTargetOptions &Options);
+std::unique_ptr<MCObjectTargetWriter> createQArchELFObjectWriter(bool Is64Bit,
+                                                                 uint8_t OSABI);
 } // namespace llvm
 
 // Defines symbolic names for QArch registers. This defines a mapping from

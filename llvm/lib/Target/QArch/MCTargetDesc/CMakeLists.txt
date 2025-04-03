@@ -4,6 +4,7 @@ add_llvm_component_library(LLVMQArchDesc
   QArchInstPrinter.cpp
   QArchMCCodeEmitter.cpp
   QArchAsmBackend.cpp
+  QArchELFObjectWriter.cpp
 
   LINK_COMPONENTS
   MC
