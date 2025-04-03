@@ -4,7 +4,9 @@
 #include "QArch.h"
 #include "QArchFrameLowering.h"
 #include "QArchISelLowering.h"
+#include "QArchInstrInfo.h"
 #include "QArchRegisterInfo.h"
+#include "llvm/CodeGen/SelectionDAGTargetInfo.h"
 #include "llvm/CodeGen/TargetSubtargetInfo.h"
 
 #define GET_SUBTARGETINFO_HEADER
@@ -16,6 +18,8 @@ class QArchSubtarget : public QArchGenSubtargetInfo {
   QArchTargetLowering TLInfo;
   QArchFrameLowering FrameLowering;
   QArchRegisterInfo RegInfo;
+  QArchInstrInfo InstrInfo;
+  SelectionDAGTargetInfo TSInfo;
 
 public:
   QArchSubtarget(const Triple &TT, const std::string &CPU, const std::string &FS,
@@ -36,6 +40,11 @@ public:
   const QArchRegisterInfo *getRegisterInfo() const override {
     QARCH_DUMP_CYAN
     return &RegInfo;
+  }
+  const QArchInstrInfo *getInstrInfo() const override { return &InstrInfo; }
+  const SelectionDAGTargetInfo *getSelectionDAGInfo() const override {
+    QARCH_DUMP_CYAN
+    return &TSInfo;
   }
 };
 
