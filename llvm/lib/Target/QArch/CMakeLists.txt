@@ -9,6 +9,7 @@ tablegen(LLVM QArchGenMCPseudoLowering.inc -gen-pseudo-lowering)
 tablegen(LLVM QArchGenDAGISel.inc -gen-dag-isel)
 tablegen(LLVM QArchGenCallingConv.inc -gen-callingconv)
 tablegen(LLVM QArchGenAsmWriter.inc -gen-asm-writer)
+tablegen(LLVM QArchGenMCCodeEmitter.inc -gen-emitter)
 
 add_public_tablegen_target(QArchCommonTableGen)
 
