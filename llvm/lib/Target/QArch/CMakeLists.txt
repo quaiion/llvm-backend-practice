@@ -20,6 +20,7 @@ add_llvm_target(QArchCodeGen
   QArchAsmPrinter.cpp
   QArchISelDagToDag.cpp
   QArchISelLowering.cpp
+  QArchMCInstLower.cpp
 
   LINK_COMPONENTS
   CodeGen

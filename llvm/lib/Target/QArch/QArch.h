@@ -22,7 +22,19 @@
 namespace llvm {
 class QArchTargetMachine;
 class FunctionPass;
+class QArchSubtarget;
+class AsmPrinter;
+class InstructionSelector;
+class MCInst;
+class MCOperand;
+class MachineInstr;
+class MachineOperand;
+class PassRegistry;
 
+bool lowerQArchMachineInstrToMCInst(const MachineInstr *MI, MCInst &OutMI,
+                                    AsmPrinter &AP);
+bool LowerQArchMachineOperandToMCOperand(const MachineOperand &MO,
+                                         MCOperand &MCOp, const AsmPrinter &AP);
 FunctionPass *createQArchISelDag(QArchTargetMachine &TM, CodeGenOptLevel OptLevel);
 
 } // namespace llvm
