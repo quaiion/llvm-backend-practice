@@ -78,4 +78,6 @@ extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeQArchTargetMC() {
   TargetRegistry::RegisterMCInstPrinter(TheQArchTarget, createQArchMCInstPrinter);
   // Register the MC Code Emitter.
   TargetRegistry::RegisterMCCodeEmitter(TheQArchTarget, createQArchMCCodeEmitter);
+  // Register the asm backend.
+  TargetRegistry::RegisterMCAsmBackend(TheQArchTarget, createQArchAsmBackend);
 }
