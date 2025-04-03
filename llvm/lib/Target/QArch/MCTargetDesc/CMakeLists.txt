@@ -1,6 +1,7 @@
 add_llvm_component_library(LLVMQArchDesc
   QArchMCTargetDesc.cpp
   QArchMCAsmInfo.cpp
+  QArchInstPrinter.cpp
 
   LINK_COMPONENTS
   MC
