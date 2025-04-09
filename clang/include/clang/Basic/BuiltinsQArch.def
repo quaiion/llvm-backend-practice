@@ -1,0 +1,8 @@
+BUILTIN(qarch_put_pixel, "viii", "nc")
+BUILTIN(qarch_flush, "v", "nc")
+BUILTIN(qarch_rand, "iii", "nc")
+BUILTIN(qarch_init, "v", "nc")
+BUILTIN(qarch_is_quit, "i", "nc")
+BUILTIN(qarch_quit, "v", "nc")
+ 
+#undef BUILTIN
